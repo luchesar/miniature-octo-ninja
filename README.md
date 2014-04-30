@@ -30,5 +30,12 @@ THE TASK
 To create a liquidation system that accepts the price data, feeds it in, and liquidates any of the trades from the trade data that exceed their stop margin. The stop price for a Buy is open price - margin, .e.g 700 - 20 = 680 stop price.
 
 The output should be a list of the trades that were liquidated, in the order they were liquidated, and the timestamp and price they were liquidated against.
+  
+e.g.
+If a Buy trade (id:9) is opened at $700 with a margin of $20,
+then the trade should be marked as liquidated if the price
+reaches 680 or below.
+Output:
+9 <timestamp of price change> 679 (note 679 is below 680)
 
 The finished task should be runnable out of the box. And should be tested. How you choose to implement the rest is entirely up to you. All source code should be supplied so that evaluation can be completed on code quality.

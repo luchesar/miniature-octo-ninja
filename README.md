@@ -36,7 +36,7 @@ If a Buy trade (id:9) is opened at $700 with a margin of $20,
 then the trade should be marked as liquidated if the price
 reaches 680 or below.
 Output:
-9 <timestamp of price change> 679 (note 679 is below 680)
+9 &lt;timestamp of price change&gt; 679 (note 679 is below 680)
 
 The finished task should be runnable out of the box. And should be tested. How you choose to implement the rest is entirely up to you. All source code should be supplied so that evaluation can be completed on code quality.
 

@@ -55,3 +55,7 @@ A. The "user" doesn't. There is not intended to be any user interaction, it's ma
 Q. How do you want the output? Screen/File/Storage?
 
 A. That is left to the programmers discretion. So long as the output can be verified after the program has run. Bear in mind any usage of data storage mechanisms should be easily replicable by us.
+
+Q. Should I program my solution for scale, given the data set is small.
+
+A. Consider the data set to be a sample of a larger dataset. You can choose to program for scale or program to fulfil the brief and data set. If you choose the latter it would be adviseable to provide some reasoning/documentation for any perceived problems with scaling, and discuss potential solutions to the problems.

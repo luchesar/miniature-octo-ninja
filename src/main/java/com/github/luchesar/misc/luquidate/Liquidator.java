@@ -15,12 +15,12 @@ public class Liquidator {
 
     public void liquidate(Trade[] buy, Trade[] sell, Price[] prices) {
         for (Price price: prices) {
-            int split = tradesStopPriceLower(buy, price.getBid());
+            int split = buyTradesToLiquidateIndex(buy, price.getBid());
             Trade[] tmpBuy = Arrays.copyOfRange(buy, 0, split);
             liquidate(price.getTime(), Arrays.copyOfRange(buy, split, buy.length), price.getBid());
             buy = tmpBuy;
 
-            int sellSplit = tradesStopPriceHigher(sell, price.getAsk());
+            int sellSplit = sellTradesToLiquidateIndex(sell, price.getAsk());
             Trade[] tmpSell = Arrays.copyOfRange(sell, sellSplit, sell.length);
             liquidate(price.getTime(), Arrays.copyOfRange(sell, 0, sellSplit), price.getAsk());
             sell = tmpSell;
@@ -33,7 +33,7 @@ public class Liquidator {
         }
     }
 
-    private int tradesStopPriceLower(Trade[] trades, float stopPrice) {
+    private int buyTradesToLiquidateIndex(Trade[] trades, float stopPrice) {
         for (int i = 0; i < trades.length; i++) {
             Trade trade = trades[i];
             if (trade.getStopPrice() > stopPrice) {
@@ -43,7 +43,7 @@ public class Liquidator {
         return trades.length;
     }
 
-    private int tradesStopPriceHigher(Trade[] trades, float stopPrice) {
+    private int sellTradesToLiquidateIndex(Trade[] trades, float stopPrice) {
         for (int i = 0; i < trades.length; i++) {
             Trade trade = trades[i];
             if (trade.getStopPrice() > stopPrice) {

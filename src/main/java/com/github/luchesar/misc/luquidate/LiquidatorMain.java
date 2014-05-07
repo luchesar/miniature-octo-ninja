@@ -42,7 +42,7 @@ public class LiquidatorMain {
         TradeParser.Trades trades = new TradeParser().parse(tradesFile);
 
         // Load all the trades into the memory and sort them on the stop price. Having them sorted will
-        // give the ability to liquidate trades with a linear complexity O(Number of trades) for each new price.
+        // give the ability to liquidate trades with a linear complexity O(log(Number of trades)) for each new price.
         Trade[] buyTrades = sortTradesByStopPrice(trades.getBuy());
         Trade[] sellTrades = sortTradesByStopPrice(trades.getSell());
 

@@ -40,11 +40,16 @@ public class LiquidatorMain {
 
     private static void liquidate(File tradesFile, File pricesFile) throws IOException {
         TradeParser.Trades trades = new TradeParser().parse(tradesFile);
+
+        // Load all the trades into the memory and sort them on the stop price. Having them sorted will
+        // give the ability to liquidate trades with a linear complexity O(Number of trades) for each new price.
         Trade[] buyTrades = sortTradesByStopPrice(trades.getBuy());
         Trade[] sellTrades = sortTradesByStopPrice(trades.getSell());
 
+        // Load all the prices into the memory
         Price[] prices = new PriceParser().parse(pricesFile);
 
+        // Sort the prices chronologically so we can feed them to the Liquidator
         Arrays.sort(prices, Ordering.natural().onResultOf(new Function<Price, Long>() {
             @Override
             public Long apply(Price trade) {

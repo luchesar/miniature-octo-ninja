@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * A lightweight in memory representation of a trade that only takes 3*32+ 64 = 160
- * bytes along with the reference to the trade instance. This makes ~153MB per 1M Prices
+ * bytes along with the reference to the price instance. This makes ~153MB per 1M Prices
  * so no problem with scaling up to few millions of trades.
  */
 public class Price {

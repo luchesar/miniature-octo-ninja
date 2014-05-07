@@ -26,7 +26,7 @@ public class PriceParser {
                     prices.add(new Price(date, bid, ask));
                 }
             }
-            return prices.toArray(new Price[0]);
+            return prices.toArray(new Price[prices.size()]);
         }
     }
 

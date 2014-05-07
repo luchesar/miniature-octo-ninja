@@ -1,7 +1,6 @@
 package com.github.luchesar.misc.luquidate;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 /**
  * A lightweight in memory representation of a trade that only takes 3*32 = 96

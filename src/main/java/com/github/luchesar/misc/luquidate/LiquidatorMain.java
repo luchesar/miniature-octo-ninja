@@ -1,25 +1,41 @@
 package com.github.luchesar.misc.luquidate;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Ordering;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.function.Function;
 
 public class LiquidatorMain {
     /**
      * The first arguments is the trades.scv and the second arg is the prices.scv
+     *
      * @param args
      */
     public static void main(String[] args) {
-        File tradesFile = new File(args[0]);
-        File pricesFile = new File(args[1]);
-
         try {
-            liquidate(tradesFile, pricesFile);
+            execute(args);
         } catch (Exception e) {
+            System.err.println(e.getMessage());
             System.exit(1);
         }
+    }
+
+    public static void execute(String[] args) throws IOException {
+        if (args.length < 2) {
+            throw new IllegalArgumentException("Please specify the trades.csv and the prices.csv as first and second parameters");
+        }
+        File tradesFile = new File(args[0]);
+        File pricesFile = new File(args[1]);
+        if (!tradesFile.exists()) {
+            throw new IllegalArgumentException("The trades file " + args[0] + " is missing");
+        }
+        if (!pricesFile.exists()) {
+            throw new IllegalArgumentException("The prices file " + args[1] + " is missing");
+        }
+
+        liquidate(tradesFile, pricesFile);
     }
 
     private static void liquidate(File tradesFile, File pricesFile) throws IOException {
@@ -29,7 +45,7 @@ public class LiquidatorMain {
 
         Price[] prices = new PriceParser().parse(pricesFile);
 
-        Arrays.sort(prices, Comparator.comparing(new Function<Price, Long>() {
+        Arrays.sort(prices, Ordering.natural().onResultOf(new Function<Price, Long>() {
             @Override
             public Long apply(Price trade) {
                 return trade.getTime();
@@ -40,7 +56,7 @@ public class LiquidatorMain {
     }
 
     private static Trade[] sortTradesByStopPrice(Trade[] trades) {
-        Arrays.sort(trades, Comparator.comparing(new Function<Trade, Float>() {
+        Arrays.sort(trades, Ordering.natural().onResultOf(new Function<Trade, Float>() {
             @Override
             public Float apply(Trade trade) {
                 return trade.getStopPrice();

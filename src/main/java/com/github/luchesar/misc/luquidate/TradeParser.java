@@ -29,7 +29,8 @@ public class TradeParser {
                     }
                 }
             }
-            return new Trades(buyTrades.toArray(new Trade[0]), sellTrades.toArray(new Trade[0]));
+            return new Trades(buyTrades.toArray(new Trade[buyTrades.size()]),
+                    sellTrades.toArray(new Trade[sellTrades.size()]));
         }
 
     }
